@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Bite | Cafe Online Ordering</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <a href="#home" class="logo">☕ Brew <span>& Bite</span></a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="cart-btn" onclick="toggleCart()">
+        🛒 Cart <span id="cart-count">0</span>
+    </button>
+</header>
+
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="hero-tag">WELCOME TO BREW & BITE</span>
+
+        <h1>Good Food.<br>
+            Great Coffee.<br>
+            <span>Better Moments.</span>
+        </h1>
+
+        <p>
+            Enjoy delicious burgers, fresh coffee, tasty pizza
+            and sweet desserts. Order your favourites online!
+        </p>
+
+        <a href="#menu" class="primary-btn">Explore Our Menu →</a>
+    </div>
+</section>
+
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="feature">
+        <span>☕</span>
+        <div>
+            <h4>Fresh Coffee</h4>
+            <p>Made with love</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span>🍔</span>
+        <div>
+            <h4>Quality Food</h4>
+            <p>Fresh ingredients</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span>🚚</span>
+        <div>
+            <h4>Fast Delivery</h4>
+            <p>At your doorstep</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <span>💳</span>
+        <div>
+            <h4>Easy Ordering</h4>
+            <p>Simple checkout</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- MENU SECTION -->
+<section class="menu-section" id="menu">
+
+    <div class="section-title">
+        <span>OUR SPECIAL MENU</span>
+        <h2>Explore Our Delicious Menu</h2>
+        <p>Choose your favourite food and order online.</p>
+    </div>
+
+    <!-- CATEGORY FILTER -->
+    <div class="categories">
+        <button class="category-btn active"
+                onclick="filterMenu('All', this)">All Items</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Coffee', this)">☕ Coffee</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Burgers', this)">🍔 Burgers</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Pizza', this)">🍕 Pizza</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Sandwiches', this)">🥪 Sandwiches</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Desserts', this)">🍰 Desserts</button>
+
+        <button class="category-btn"
+                onclick="filterMenu('Drinks', this)">🥤 Drinks</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text"
+               id="searchInput"
+               placeholder="Search coffee, burger, pizza..."
+               oninput="searchMenu()">
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="menu-grid" id="menu-list"></div>
+
+</section>
+
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+    <div class="about-image">
+        <img
+          src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900"
+          alt="Cafe coffee preparation">
+    </div>
+
+    <div class="about-content">
+        <span>ABOUT OUR CAFE</span>
+        <h2>We Serve Happiness With Every Cup</h2>
+
+        <p>
+            Brew & Bite is a modern cafe where delicious food
+            meets great coffee. We offer fresh meals, quality
+            ingredients and a comfortable food ordering experience.
+        </p>
+
+        <p>
+            From morning coffee to evening snacks,
+            we have something special for everyone.
+        </p>
+
+        <a href="#menu" class="primary-btn">Order Your Food</a>
+    </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="section-title">
+        <span>GET IN TOUCH</span>
+        <h2>Contact Our Cafe</h2>
+        <p>We would love to hear from you!</p>
+    </div>
+
+    <div class="contact-details">
+        <div>📍 <strong>Location</strong><p>Your City, Pakistan</p></div>
+        <div>📞 <strong>Phone</strong><p>0300-1234567</p></div>
+        <div>✉️ <strong>Email</strong><p>info@brewandbite.com</p></div>
+    </div>
+</section>
+
+
+<!-- CART OVERLAY -->
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+<!-- SHOPPING CART -->
+<aside class="cart-panel" id="cart-panel">
+
+    <div class="cart-header">
+        <h2>🛒 Your Order</h2>
+        <button class="close-btn" onclick="toggleCart()">✕</button>
+    </div>
+
+    <div class="cart-items" id="cart-items">
+        <p class="empty-cart">Your cart is empty!</p>
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="bill-row">
+            <span>Subtotal</span>
+            <strong id="subtotal">Rs. 0</strong>
+        </div>
+
+        <div class="bill-row">
+            <span>Delivery Fee</span>
+            <strong id="delivery">Rs. 0</strong>
+        </div>
+
+        <div class="bill-row grand-total">
+            <span>Total Amount</span>
+            <strong id="total">Rs. 0</strong>
+        </div>
+
+        <button class="checkout-btn" onclick="openCheckout()">
+            Proceed to Checkout →
+        </button>
+
+    </div>
+</aside>
+
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkout-modal">
+
+    <div class="modal-box">
+
+        <button class="close-btn modal-close"
+                onclick="closeCheckout()">✕</button>
+
+        <h2>Complete Your Order</h2>
+        <p>Please enter your delivery details.</p>
+
+        <form id="checkout-form">
+
+            <label>Customer Name</label>
+            <input type="text" id="customer-name"
+                   placeholder="Enter your name" required>
+
+            <label>Phone Number</label>
+            <input type="tel" id="customer-phone"
+                   placeholder="03XXXXXXXXX"
+                   pattern="[0-9]{11}" required>
+
+            <label>Delivery Address</label>
+            <textarea id="customer-address"
+                      placeholder="Enter complete address"
+                      required></textarea>
+
+            <label>Order Type</label>
+            <select id="order-type">
+                <option value="Home Delivery">Home Delivery</option>
+                <option value="Takeaway">Takeaway</option>
+            </select>
+
+            <label>Payment Method</label>
+            <select id="payment-method">
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="Pay at Cafe">Pay at Cafe</option>
+            </select>
+
+            <label>Special Instructions (Optional)</label>
+            <textarea id="special-instructions"
+                      placeholder="Extra cheese, no onions, etc."></textarea>
+
+            <button type="submit" class="checkout-btn">
+                Confirm Order
+            </button>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- ORDER HISTORY -->
+<section class="order-history" id="order-history">
+    <h2>📋 Recent Orders</h2>
+    <div id="history-list">
+        <p>No orders placed yet.</p>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+    <h2>☕ Brew & Bite</h2>
+    <p>Great food, fresh coffee and unforgettable moments.</p>
+    <p>© 2026 Brew & Bite Cafe | Student Project</p>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
